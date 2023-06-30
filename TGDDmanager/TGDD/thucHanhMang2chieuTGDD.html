@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <h1>Thế giới di động</h1>
+        <button onclick="addProduct()">add</button>
+        <div id="list-product"></div>
+        <script>
+            let products = [
+                ["https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/250625/samsung-galaxy-z-fold4-kem-256gb-600x600.jpg", "Samsung Galaxy Z Fold4 5G 256GB", 30990000],
+                ["https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/54/253802/bluetooth-airpods-pro-magsafe-charge-apple-mlwk3-thumb-600x600.jpeg", "Tai nghe Bluetooth AirPods Pro MagSafe", 4690000],
+                ["https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/44/268712/dell-xps-17-9710-i7-xps7i7001w1-1-600x600.jpg", "Dell XPS 17 9710 i7 118000H", 49990000],
+                ["https://cdn.tgdd.vn/Products/Images/54/245808/bluetooth-true-wireless-mozard-air-6-ava-1-600x600.jpg", "Tai nghe Mozard", 355000],
+            ]
+            function display(){
+                let str = "";
+                for(let i=0; i<products.length; i++){
+                    str += `<div class="card">
+                            <div class="img-border">
+                                <img src="${products[i][0]}" alt="${products[i][0]}" style="width:100%">
+                            </div>
+                            <h1>${products[i][1]}</h1>
+                            <p class = "price">${products[i][2]}</p>
+                            <p><button>Add to Cart</button></p>
+                            <p><button onclick="xoaSanPham(${i})">Remove</button></p>
+                            <p><button onclick="suaSanPham(${i})">change</button></p>
+                    </div>`;
+                }
+                document.getElementById("list-product").innerHTML = str;
+            }
+            display();
+            function addProduct(){
+                let name = prompt("Tên sản phẩm");
+                let price = prompt("giá sản phẩm");
+                let img = prompt("ảnh sản phẩm (copy link)");
+
+                let productsInfo = [img, name, price];
+                products.push(productsInfo);
+                display();
+            }
+            function xoaSanPham(index){
+                products.splice(index, 1);
+                display();
+            }
+
+            function suaSanPham(index) {
+                products[index][0] = prompt("Link ảnh",products[index][0])          // phần thứ 2 trong prompt đùng để khi người dùng k nhập gì sẽ lấy giá trị mặc định
+                products[index][1] = prompt("Tên sản phẩm",products[index][1])
+                products[index][2] = prompt("Giá sản phẩm",products[index][2])
+                display();
+            }
+            display();
+        </script>
+</body>
+</html>
